@@ -1,3 +1,4 @@
+import "./Grid.css";
 import { useEffect, useState } from "react";
 import Box from "../box/box";
 
@@ -9,53 +10,108 @@ const Grid = () => {
       [{}, {}, {}],
     ],
     item: true,
+    movement: 0,
   });
 
   useEffect(() => {
-    /// Refactorizar
-    const winRow = (item) => {
-      let win = false;
-      gridState.matrix.forEach((row) => {
-        if (!win && row.length) {
-          win = row.every(({ select }) => {
-            return select === item;
-          });
-        }
-      });
-      return win;
-    };
-    const winColumn = (item) => {
-      let win = true;
-      for (let i = 0; i < 3; i++) {
-        win = true;
-        for (let j = 0; j < 3; j++) {
-          if (gridState.matrix[j][i].select !== item) {
-            win = false;
+    const winRow = () => {
+      let possibleWinner = false;
+      let firstElement = "";
+      for (let index = 0; index < gridState.matrix.length; index++) {
+        firstElement = gridState.matrix[index][0].select;
+        possibleWinner = gridState.matrix[index].every(({ select }) => {
+          if (select) {
+            return select === firstElement;
           }
-        }
-        if (win) {
+          return false;
+        });
+        if (possibleWinner) {
           break;
         }
       }
-      return win;
+      return possibleWinner ? firstElement : "";
     };
-    if (winRow("O") || winColumn("O")) {
-      alert("The second player win");
-    }
-    if (winRow("X") || winColumn("X")) {
-      alert("The first player win");
+
+    const winColumn = () => {
+      let firstElement = "";
+      let possibleWinner = true;
+      for (
+        let indexColumn = 0;
+        indexColumn < gridState.matrix.length;
+        indexColumn++
+      ) {
+        possibleWinner = true;
+        firstElement = gridState.matrix[0][indexColumn].select;
+        for (let indexRow = 0; indexRow < gridState.matrix.length; indexRow++) {
+          if (firstElement !== gridState.matrix[indexRow][indexColumn].select) {
+            possibleWinner = false;
+          }
+          if (!possibleWinner) {
+            break;
+          }
+        }
+        if (possibleWinner) {
+          break;
+        }
+      }
+      return possibleWinner ? firstElement : "";
+    };
+
+    const winDiag = () => {
+      let firstElement = "";
+      let possibleWinner = true;
+      for (let diag = 0; diag < 2; diag++) {
+        possibleWinner = true;
+        firstElement = diag
+          ? gridState.matrix[0][gridState.matrix.length - 1].select
+          : gridState.matrix[0][0].select;
+        for (let index = 0; index < gridState.matrix.length; index++) {
+          let indexColumn = diag ? gridState.matrix.length - 1 - index : index;
+          debugger;
+          if (firstElement !== gridState.matrix[index][indexColumn].select) {
+            possibleWinner = false;
+            break;
+          }
+        }
+        if (possibleWinner) {
+          break;
+        }
+      }
+      return possibleWinner ? firstElement : "";
+    };
+
+    if (gridState.movement > 4) {
+      const possibleWinInRow = winRow();
+      let textToWin = "";
+      if (possibleWinInRow !== "") {
+        textToWin =
+          possibleWinInRow === "X"
+            ? "Row: The first player win!"
+            : "Row: The second player win!";
+        alert(textToWin);
+      }
+      const possibleWinInColumn = winColumn();
+      if (possibleWinInColumn !== "") {
+        textToWin =
+          possibleWinInColumn === "X"
+            ? "Column: The first player win!"
+            : "Column: The second player win!";
+        alert(textToWin);
+      }
+      const possibleWinInDiag = winDiag();
+      if (possibleWinInDiag !== "") {
+        textToWin =
+          possibleWinInDiag === "X"
+            ? "Diag: The first player win!"
+            : "Diag: The second player win!";
+        alert(textToWin);
+      }
     }
   }, [gridState]);
 
   return (
-    <div
-      style={{
-        border: "1px solid black",
-        width: "fit-content",
-        height: "100%",
-      }}
-    >
-      <div style={{ display: "flex", flexDirection: "row" }}>
+    <div className="grid-container">
+      <div className="row-container">
         <Box
           gridState={gridState}
           setGridState={setGridState}
@@ -65,6 +121,7 @@ const Grid = () => {
         <Box
           gridState={gridState}
           setGridState={setGridState}
+          paint="top"
           row={0}
           column={1}
         />
@@ -75,27 +132,30 @@ const Grid = () => {
           column={2}
         />
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className="row-container">
         <Box
           gridState={gridState}
           setGridState={setGridState}
+          paint="left"
           row={1}
           column={0}
         />
         <Box
           gridState={gridState}
           setGridState={setGridState}
+          paint="center"
           row={1}
           column={1}
         />
         <Box
           gridState={gridState}
           setGridState={setGridState}
+          paint="left"
           row={1}
           column={2}
         />
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div className="row-container">
         <Box
           gridState={gridState}
           setGridState={setGridState}
@@ -105,6 +165,7 @@ const Grid = () => {
         <Box
           gridState={gridState}
           setGridState={setGridState}
+          paint="top"
           row={2}
           column={1}
         />

@@ -3,10 +3,10 @@ import Grid from "./components/grid/Grid";
 
 function App() {
   return (
-    <>
-      <h1>Tic-Tac-Toe</h1>
+    <div>
+      <h1 id="game-title">Tic-Tac-Toe</h1>
       <Grid />
-    </>
+    </div>
   );
 }
 

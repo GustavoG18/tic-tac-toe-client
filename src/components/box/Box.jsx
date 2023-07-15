@@ -1,6 +1,7 @@
+import "./Box.css";
 import { useState } from "react";
 
-const Box = ({ gridState, setGridState, row, column }) => {
+const Box = ({ gridState, setGridState, paint, row, column }) => {
   const [item, setItem] = useState(undefined);
 
   const handleOnClick = () => {
@@ -11,6 +12,7 @@ const Box = ({ gridState, setGridState, row, column }) => {
         column,
         select: cloneGridState.item ? "X" : "O",
       };
+      cloneGridState.movement += 1;
       setItem(cloneGridState.matrix[row][column].select);
       cloneGridState.item = !cloneGridState.item;
       setGridState(cloneGridState);
@@ -18,25 +20,10 @@ const Box = ({ gridState, setGridState, row, column }) => {
   };
 
   return (
-    <div
-      style={{
-        width: "100px",
-        height: "100px",
-        border: "1px solid red",
-      }}
-      onClick={handleOnClick}
-    >
+    <div className={`${paint} box-dimension`} onClick={handleOnClick}>
       {item ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100px",
-            height: "100px",
-          }}
-        >
-          {item}
+        <div className="item-container">
+          <h2 className="item">{item}</h2>
         </div>
       ) : null}
     </div>

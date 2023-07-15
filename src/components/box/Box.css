@@ -1,0 +1,30 @@
+.center {
+  border: 1px solid #f5b0cb;
+}
+
+.top {
+  border-left: 1px solid #f5b0cb;
+  border-right: 1px solid #f5b0cb;
+}
+
+.left {
+  border-top: 1px solid #f5b0cb;
+  border-bottom: 1px solid #f5b0cb;
+}
+
+.item {
+  color: #f5b0cb;
+}
+
+.item-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+}
+
+.box-dimension {
+  width: 100px;
+  height: 100px;
+}

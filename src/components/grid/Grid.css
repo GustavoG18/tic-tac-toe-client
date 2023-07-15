@@ -1,0 +1,9 @@
+.grid-container {
+  width: fit-content;
+  height: 100%;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+}

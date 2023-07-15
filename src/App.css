@@ -1,1 +1,15 @@
+body {
+  background-color: #6f4c99;
+  margin: 0px;
+}
 
+#root {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-title {
+  color: #f5b0cb;
+}
