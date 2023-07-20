@@ -1,4 +1,5 @@
 import "./App.css";
+import "./global.css";
 import Grid from "./components/grid/Grid";
 
 function App() {

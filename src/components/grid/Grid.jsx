@@ -26,6 +26,22 @@ const Grid = () => {
           return false;
         });
         if (possibleWinner) {
+          const lineToWin = document.getElementById("line-to-win");
+          const root = document.documentElement;
+          switch (index) {
+            case 0:
+              root.style.setProperty("--win-top", "50px");
+              break;
+            case 1:
+              root.style.setProperty("--win-top", "150px");
+              break;
+            case 2:
+              root.style.setProperty("--win-top", "250px");
+              break;
+          }
+          lineToWin.classList.add("animation");
+          lineToWin.setAttribute("checked", true);
+          lineToWin.removeAttribute("hidden");
           break;
         }
       }
@@ -40,8 +56,8 @@ const Grid = () => {
         indexColumn < gridState.matrix.length;
         indexColumn++
       ) {
-        possibleWinner = true;
         firstElement = gridState.matrix[0][indexColumn].select;
+        possibleWinner = firstElement ? true : false;
         for (let indexRow = 0; indexRow < gridState.matrix.length; indexRow++) {
           if (firstElement !== gridState.matrix[indexRow][indexColumn].select) {
             possibleWinner = false;
@@ -51,6 +67,22 @@ const Grid = () => {
           }
         }
         if (possibleWinner) {
+          const lineToWin = document.getElementById("line-to-win");
+          const root = document.documentElement;
+          root.style.setProperty("--win-transform-rotate", "90deg");
+          switch (indexColumn) {
+            case 0:
+              root.style.setProperty("--win-left", "50px");
+              break;
+            case 1:
+              root.style.setProperty("--win-left", "150px");
+              break;
+            case 2:
+              root.style.setProperty("--win-left", "250px");
+              break;
+          }
+          lineToWin.classList.add("animation");
+          lineToWin.removeAttribute("hidden");
           break;
         }
       }
@@ -67,13 +99,28 @@ const Grid = () => {
           : gridState.matrix[0][0].select;
         for (let index = 0; index < gridState.matrix.length; index++) {
           let indexColumn = diag ? gridState.matrix.length - 1 - index : index;
-          debugger;
           if (firstElement !== gridState.matrix[index][indexColumn].select) {
             possibleWinner = false;
             break;
           }
         }
         if (possibleWinner) {
+          const lineToWin = document.getElementById("line-to-win");
+          const root = document.documentElement;
+          root.style.setProperty("--win-top", "39px");
+          switch (diag) {
+            case 0:
+              root.style.setProperty("--win-transform-rotate", "45deg");
+              root.style.setProperty("--win-left", "39px");
+              break;
+            case 1:
+              root.style.setProperty("--win-transform-rotate", "315deg");
+              root.style.setProperty("--win-transform-origin", "100%");
+              root.style.setProperty("--win-left", "-39px");
+              break;
+          }
+          lineToWin.classList.add("animation");
+          lineToWin.removeAttribute("hidden");
           break;
         }
       }
@@ -110,71 +157,74 @@ const Grid = () => {
   }, [gridState]);
 
   return (
-    <div className="grid-container">
-      <div className="row-container">
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          row={0}
-          column={0}
-        />
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          paint="top"
-          row={0}
-          column={1}
-        />
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          row={0}
-          column={2}
-        />
-      </div>
-      <div className="row-container">
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          paint="left"
-          row={1}
-          column={0}
-        />
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          paint="center"
-          row={1}
-          column={1}
-        />
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          paint="left"
-          row={1}
-          column={2}
-        />
-      </div>
-      <div className="row-container">
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          row={2}
-          column={0}
-        />
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          paint="top"
-          row={2}
-          column={1}
-        />
-        <Box
-          gridState={gridState}
-          setGridState={setGridState}
-          row={2}
-          column={2}
-        />
+    <div id="container-relative">
+      <hr id="line-to-win" className="win line" hidden />
+      <div className="grid-container">
+        <div className="row-container">
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            row={0}
+            column={0}
+          />
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            paint="top"
+            row={0}
+            column={1}
+          />
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            row={0}
+            column={2}
+          />
+        </div>
+        <div className="row-container">
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            paint="left"
+            row={1}
+            column={0}
+          />
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            paint="center"
+            row={1}
+            column={1}
+          />
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            paint="left"
+            row={1}
+            column={2}
+          />
+        </div>
+        <div className="row-container">
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            row={2}
+            column={0}
+          />
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            paint="top"
+            row={2}
+            column={1}
+          />
+          <Box
+            gridState={gridState}
+            setGridState={setGridState}
+            row={2}
+            column={2}
+          />
+        </div>
       </div>
     </div>
   );

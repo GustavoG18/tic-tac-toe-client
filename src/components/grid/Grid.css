@@ -7,3 +7,38 @@
   display: flex;
   flex-direction: row;
 }
+
+#container-relative {
+  position: relative;
+}
+
+.line {
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  margin: 0;
+  border: none;
+  background-color: #f5b0cb;
+}
+
+.win {
+  transform: rotate(var(--win-transform-rotate));
+  transform-origin: var(--win-transform-origin);
+  top: var(--win-top);
+  left: var(--win-left);
+}
+
+@keyframes expand-hr {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animation {
+  animation-name: expand-hr;
+  animation-duration: 2s;
+  animation-timing-function: ease;
+}
