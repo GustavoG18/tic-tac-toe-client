@@ -3,4 +3,8 @@
   --win-transform-rotate: 0deg;
   --win-top: 0px;
   --win-left: 0px;
+  --color-primary-light: #6f4c99;
+  --color-secundary-light: #f9d1e1;
+  --color-primary-dark: #424242;
+  --color-secundary-light: #ffffff;
 }

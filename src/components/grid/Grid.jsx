@@ -1,8 +1,11 @@
 import "./Grid.css";
 import { useEffect, useState } from "react";
 import Box from "../box/box";
+import { useTheme } from "../../ThemeContext";
+import ModalToWin from "../modalToWin/ModalToWin";
 
 const Grid = () => {
+  const { theme } = useTheme();
   const [gridState, setGridState] = useState({
     matrix: [
       [{}, {}, {}],
@@ -11,6 +14,7 @@ const Grid = () => {
     ],
     item: true,
     movement: 0,
+    winner: 0,
   });
 
   useEffect(() => {
@@ -131,34 +135,28 @@ const Grid = () => {
       const possibleWinInRow = winRow();
       let textToWin = "";
       if (possibleWinInRow !== "") {
-        textToWin =
-          possibleWinInRow === "X"
-            ? "Row: The first player win!"
-            : "Row: The second player win!";
-        alert(textToWin);
+        setGridState((prev) => {
+          return { ...prev, winner: possibleWinInRow === "X" ? 1 : 2 };
+        });
       }
       const possibleWinInColumn = winColumn();
       if (possibleWinInColumn !== "") {
-        textToWin =
-          possibleWinInColumn === "X"
-            ? "Column: The first player win!"
-            : "Column: The second player win!";
-        alert(textToWin);
+        setGridState((prev) => {
+          return { ...prev, winner: possibleWinInColumn === "X" ? 1 : 2 };
+        });
       }
       const possibleWinInDiag = winDiag();
       if (possibleWinInDiag !== "") {
-        textToWin =
-          possibleWinInDiag === "X"
-            ? "Diag: The first player win!"
-            : "Diag: The second player win!";
-        alert(textToWin);
+        setGridState((prev) => {
+          return { ...prev, winner: possibleWinInDiag === "X" ? 1 : 2 };
+        });
       }
     }
   }, [gridState]);
 
   return (
     <div id="container-relative">
-      <hr id="line-to-win" className="win line" hidden />
+      <hr id="line-to-win" className={`win line ${theme}`} hidden />
       <div className="grid-container">
         <div className="row-container">
           <Box
@@ -226,6 +224,7 @@ const Grid = () => {
           />
         </div>
       </div>
+      <ModalToWin winner={gridState.winner} show={gridState.winner} />
     </div>
   );
 };

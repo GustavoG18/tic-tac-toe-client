@@ -1,8 +1,10 @@
 import "./Box.css";
 import { useState } from "react";
+import { useTheme } from "../../ThemeContext";
 
 const Box = ({ gridState, setGridState, paint, row, column }) => {
   const [item, setItem] = useState(undefined);
+  const { theme } = useTheme();
 
   const handleOnClick = () => {
     if (!item) {
@@ -20,10 +22,10 @@ const Box = ({ gridState, setGridState, paint, row, column }) => {
   };
 
   return (
-    <div className={`${paint} box-dimension`} onClick={handleOnClick}>
+    <div className={`${paint} box-dimension ${theme}`} onClick={handleOnClick}>
       {item ? (
         <div className="item-container">
-          <h2 className="item">{item}</h2>
+          <h2 className={`item ${theme}`}>{item}</h2>
         </div>
       ) : null}
     </div>

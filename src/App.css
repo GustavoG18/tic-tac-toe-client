@@ -1,15 +1,46 @@
 body {
-  background-color: #6f4c99;
   margin: 0px;
+  padding: 0px;
 }
 
 #root {
   height: 100vh;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.wrapper.light {
+  background-color: #6f4c99;
+}
+.wrapper.dark {
+  background-color: #424242;
+}
+
+.container-title {
+  display: flex;
+  gap: 15px;
+}
+
 #game-title {
-  color: #f5b0cb;
+  margin-bottom: 20px;
+}
+
+#game-title.light {
+  color: #f9d1e1;
+}
+
+#game-title.dark {
+  color: #ffffff;
+}
+
+.switch {
+  position: absolute;
+  top: 0;
 }

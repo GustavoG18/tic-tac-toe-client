@@ -18,7 +18,13 @@
   width: 100%;
   margin: 0;
   border: none;
-  background-color: #f5b0cb;
+}
+
+.line.light {
+  background-color: #f9d1e1;
+}
+.line.dark {
+  background-color: #ffffff;
 }
 
 .win {

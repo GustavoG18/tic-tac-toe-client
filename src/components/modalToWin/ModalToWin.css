@@ -1,0 +1,10 @@
+.message {
+  margin-top: -30px;
+}
+
+.message.light {
+  color: #f9d1e1;
+}
+.message.dark {
+  color: #ffffff;
+}
