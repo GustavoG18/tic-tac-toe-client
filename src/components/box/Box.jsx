@@ -1,5 +1,5 @@
 import "./Box.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "../../ThemeContext";
 
 const Box = ({ gridState, setGridState, paint, row, column }) => {
@@ -20,6 +20,12 @@ const Box = ({ gridState, setGridState, paint, row, column }) => {
       setGridState(cloneGridState);
     }
   };
+
+  useEffect(() => {
+    if (!gridState.movement) {
+      setItem(undefined);
+    }
+  }, [gridState]);
 
   return (
     <div className={`${paint} box-dimension ${theme}`} onClick={handleOnClick}>

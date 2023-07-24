@@ -8,3 +8,37 @@
 .message.dark {
   color: #ffffff;
 }
+
+.modal-content.light {
+  background: #6f4c99;
+  color: #ffffff;
+}
+
+.modal-content.dark {
+  background: #424242;
+  color: #ffffff;
+}
+/* 
+#modal-content-setting {
+  background: #6f4c99;
+  color: #ffffff;
+} */
+
+.close {
+  color: #ffffff;
+}
+
+.close:hover {
+  color: #ffffff;
+}
+
+.btn.light {
+  background: #9364cec0;
+}
+
+.btn.light:focus {
+  outline: none;
+}
+.btn.light:hover {
+  background: #9364cec0;
+}

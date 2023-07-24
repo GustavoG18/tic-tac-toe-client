@@ -131,9 +131,8 @@ const Grid = () => {
       return possibleWinner ? firstElement : "";
     };
 
-    if (gridState.movement > 4) {
+    if (gridState.movement > 4 && !gridState.winner) {
       const possibleWinInRow = winRow();
-      let textToWin = "";
       if (possibleWinInRow !== "") {
         setGridState((prev) => {
           return { ...prev, winner: possibleWinInRow === "X" ? 1 : 2 };
@@ -153,6 +152,20 @@ const Grid = () => {
       }
     }
   }, [gridState]);
+
+  const resetGame = () => {
+    document.getElementById("line-to-win").setAttribute("hidden", true);
+    setGridState({
+      matrix: [
+        [{}, {}, {}],
+        [{}, {}, {}],
+        [{}, {}, {}],
+      ],
+      item: true,
+      movement: 0,
+      winner: 0,
+    });
+  };
 
   return (
     <div id="container-relative">
@@ -224,7 +237,11 @@ const Grid = () => {
           />
         </div>
       </div>
-      <ModalToWin winner={gridState.winner} show={gridState.winner} />
+      <ModalToWin
+        winner={gridState.winner}
+        show={gridState.winner}
+        resetGame={resetGame}
+      />
     </div>
   );
 };
