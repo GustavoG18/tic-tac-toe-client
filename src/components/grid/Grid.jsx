@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import Box from "../box/box";
 import { useTheme } from "../../ThemeContext";
 import ModalToWin from "../modalToWin/ModalToWin";
+import ProgressMovement from "../../custom-variants-material-ui/LinearProgress.styled";
+import ButtonPrimary from "../../custom-variants-material-ui/Button.styled";
 
-const Grid = () => {
+const GridAux = () => {
   const { theme } = useTheme();
   const [gridState, setGridState] = useState({
     matrix: [
@@ -169,6 +171,7 @@ const Grid = () => {
 
   return (
     <div id="container-relative">
+      <ProgressMovement movement={gridState.movement} />
       <hr id="line-to-win" className={`win line ${theme}`} hidden />
       <div className="grid-container">
         <div className="row-container">
@@ -237,6 +240,13 @@ const Grid = () => {
           />
         </div>
       </div>
+      {gridState.movement === 9 && !gridState.winner && (
+        <div
+          style={{ width: "100%", display: "flex", justifyContent: "center" }}
+        >
+          <ButtonPrimary label="Reset" handleOnClick={resetGame} />
+        </div>
+      )}
       <ModalToWin
         winner={gridState.winner}
         show={gridState.winner}
@@ -246,4 +256,4 @@ const Grid = () => {
   );
 };
 
-export default Grid;
+export default GridAux;

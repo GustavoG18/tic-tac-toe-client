@@ -1,19 +1,37 @@
 import "./App.css";
 import "./Global.css";
-import Grid from "./components/grid/Grid";
-import Switch from "./components/switch/Switch";
-import { useTheme } from "./ThemeContext";
+import GridAux from "./components/grid/Grid";
+import { Box, LinearProgress } from "@mui/material";
+import Container from "./custom-variants-material-ui/Container.styled";
+import LinksButton from "./custom-variants-material-ui/LinksButton.styled";
+import SwitchThemeMode from "./custom-variants-material-ui/SwitchThemeMode.styled";
 
 function App() {
-  const { theme } = useTheme();
   return (
-    <div className={`wrapper ${theme}`}>
-      <Switch />
-      <h1 id="game-title" className={`${theme}`}>
-        Tic-Tac-Toe
-      </h1>
-      <Grid />
-    </div>
+    <Container height="100vh" alignItems="flex-end">
+      <Container justifyContent="space-between">
+        <SwitchThemeMode size="small" />
+        <LinksButton width="auto" />
+      </Container>
+      <Container height="95%">
+        <Container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+        >
+          <GridAux />
+        </Container>
+        {/* <Container
+          justifyContent="center"
+          alignItems="center"
+          bgcolor="black"
+          width="50%"
+        >
+          <GridAux />
+        </Container> */}
+      </Container>
+    </Container>
   );
 }
 

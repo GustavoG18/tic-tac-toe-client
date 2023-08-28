@@ -1,5 +1,5 @@
 .center {
-  border: 1px solid #f9d1e1;
+  border: 3px solid #f9d1e1;
 }
 
 .center.light {
@@ -10,8 +10,8 @@
 }
 
 .top {
-  border-left: 1px solid #f9d1e1;
-  border-right: 1px solid #f9d1e1;
+  border-left: 3px solid #f9d1e1;
+  border-right: 3px solid #f9d1e1;
 }
 
 .top.light {
@@ -22,8 +22,8 @@
 }
 
 .left {
-  border-top: 1px solid #f9d1e1;
-  border-bottom: 1px solid #f9d1e1;
+  border-top: 3px solid #f9d1e1;
+  border-bottom: 3px solid #f9d1e1;
 }
 
 .left.light {
